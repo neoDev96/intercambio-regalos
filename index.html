@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta
+    name="description"
+    content="Lista de deseos para nuestro convivio del 5 de diciembre de 2026."
+  />
+  <title>Intercambio de Regalos | Convivio 2026</title>
+
+  <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+  />
+  <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+  />
+  <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/simple-datatables@9.0.3/dist/style.css"
+  />
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar__inner">
+      <a href="index.html" class="topbar__brand" aria-label="Ir al inicio">
+        <span class="topbar__emblem" aria-hidden="true">
+          <i class="bi bi-gift-fill"></i>
+        </span>
+        <div>
+          <p class="topbar__eyebrow">Convivio 2026</p>
+          <h1 class="topbar__title">Intercambio de Regalos</h1>
+        </div>
+      </a>
+      <span class="topbar__season">
+        <i class="bi bi-calendar-heart" aria-hidden="true"></i>
+        5 de diciembre de 2026
+      </span>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" aria-labelledby="tituloPrincipal">
+      <div class="nieve" id="nieve" aria-hidden="true"></div>
+      <div class="hero__decor hero__decor--left" aria-hidden="true">
+        <i class="bi bi-snow2"></i>
+      </div>
+      <div class="hero__decor hero__decor--right" aria-hidden="true">
+        <i class="bi bi-stars"></i>
+      </div>
+
+      <div class="hero__content">
+        <span class="hero__tag" id="etiquetaHero">
+          <i class="bi bi-gift" aria-hidden="true"></i> Un detalle pensado con cariño
+        </span>
+
+        <div class="hero__regalo-hoy d-none" id="regaloHoy">
+          <svg
+            viewBox="0 0 180 160"
+            role="img"
+            aria-label="Regalo envuelto con un moño dorado"
+          >
+            <defs>
+              <linearGradient id="cajaRegalo" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0%" stop-color="#f8e5b9" />
+                <stop offset="100%" stop-color="#d8aa45" />
+              </linearGradient>
+              <linearGradient id="listonRegalo" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0%" stop-color="#a72536" />
+                <stop offset="100%" stop-color="#68131f" />
+              </linearGradient>
+            </defs>
+            <ellipse cx="90" cy="148" rx="66" ry="8" fill="rgba(39,8,13,.22)" />
+            <rect x="27" y="65" width="126" height="78" rx="8" fill="url(#cajaRegalo)" />
+            <rect x="20" y="53" width="140" height="28" rx="7" fill="#f2ddb0" />
+            <rect x="78" y="53" width="24" height="90" fill="url(#listonRegalo)" />
+            <path d="M89 54C65 52 48 42 50 27c2-13 20-13 30-5 8 6 11 18 10 32Z" fill="url(#listonRegalo)" />
+            <path d="M91 54c24-2 41-12 39-27-2-13-20-13-30-5-8 6-11 18-9 32Z" fill="url(#listonRegalo)" />
+            <circle cx="90" cy="55" r="10" fill="#8f1d2c" />
+            <circle cx="35" cy="31" r="3" fill="#f2ddb0" />
+            <circle cx="149" cy="28" r="4" fill="#f2ddb0" />
+            <path d="M26 42l3 7 7 3-7 3-3 7-3-7-7-3 7-3 3-7Z" fill="#fff" opacity=".88" />
+            <path d="M151 79l2 5 5 2-5 2-2 5-2-5-5-2 5-2 2-5Z" fill="#fff" opacity=".78" />
+          </svg>
+        </div>
+
+        <h2 id="tituloPrincipal">
+          Comparte lo que te gustaría recibir en nuestro convivio el día 5 de diciembre de 2026
+        </h2>
+        <p id="descripcionPrincipal">
+          Agrega una idea clara para ayudar a quien tenga la alegría de preparar tu regalo.
+          Revisa bien tu información antes de enviarla, porque después no podrá modificarse.
+        </p>
+        <div class="hero__actions">
+          <button type="button" class="btn btn-festive btn-lg" id="btnAgregarDeseo">
+            <i class="bi bi-gift-fill me-2" aria-hidden="true"></i>Agregar mi deseo
+          </button>
+          <a href="#listaDeseos" class="btn btn-light-gold btn-lg">
+            <i class="bi bi-card-list me-2" aria-hidden="true"></i>Ver la lista
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="resumen" aria-label="Resumen del intercambio">
+      <div class="resumen__item">
+        <span class="resumen__icon" aria-hidden="true"><i class="bi bi-people-fill"></i></span>
+        <div>
+          <strong id="totalDeseos">0</strong>
+          <span>personas en la lista</span>
+        </div>
+      </div>
+      <div class="resumen__divisor" aria-hidden="true"></div>
+      <div class="resumen__item resumen__item--reloj">
+        <span class="resumen__icon" aria-hidden="true"><i class="bi bi-clock-history"></i></span>
+        <div class="cuenta-convivio">
+          <div class="reloj" role="timer" aria-label="Cuenta regresiva para el convivio">
+            <div class="reloj__unidad">
+              <strong class="reloj__numero" id="relojDias">00</strong>
+              <small>Días</small>
+            </div>
+            <span class="reloj__separador" aria-hidden="true">:</span>
+            <div class="reloj__unidad">
+              <strong class="reloj__numero" id="relojHoras">00</strong>
+              <small>Horas</small>
+            </div>
+            <span class="reloj__separador" aria-hidden="true">:</span>
+            <div class="reloj__unidad">
+              <strong class="reloj__numero" id="relojMinutos">00</strong>
+              <small>Min</small>
+            </div>
+            <span class="reloj__separador" aria-hidden="true">:</span>
+            <div class="reloj__unidad">
+              <strong class="reloj__numero" id="relojSegundos">00</strong>
+              <small>Seg</small>
+            </div>
+          </div>
+          <span class="reloj__descripcion" id="textoCuentaConvivio">para nuestro convivio</span>
+        </div>
+      </div>
+      <div class="resumen__divisor" aria-hidden="true"></div>
+      <div class="resumen__item">
+        <span class="resumen__icon" aria-hidden="true"><i class="bi bi-lock-fill"></i></span>
+        <div>
+          <strong>Una sola decisión</strong>
+          <span>los deseos no se editan</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="contenido" id="listaDeseos" aria-labelledby="tituloLista">
+      <div class="panel">
+        <div class="panel__header">
+          <div>
+            <span class="panel__eyebrow">Ideas para compartir</span>
+            <h2 id="tituloLista">Lista de deseos</h2>
+            <p>Consulta las ideas registradas y encuentra el regalo indicado para cada persona.</p>
+          </div>
+          <button type="button" class="btn btn-outline-festive" id="btnActualizar">
+            <i class="bi bi-arrow-clockwise me-1" aria-hidden="true"></i>Actualizar
+          </button>
+        </div>
+
+        <div class="table-responsive">
+          <table id="tablaRegalos" class="table tabla-regalos align-middle">
+            <thead>
+              <tr>
+                <th scope="col">Nombre</th>
+              </tr>
+            </thead>
+            <tbody id="cuerpoTabla">
+              <tr>
+                <td class="estado-tabla">
+                  <span class="spinner-border spinner-border-sm me-2" aria-hidden="true"></span>
+                  Cargando listas…
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="estado-vacio d-none" id="estadoVacio">
+          <span class="estado-vacio__icon" aria-hidden="true"><i class="bi bi-envelope-heart"></i></span>
+          <h3>La lista está esperando su primer deseo</h3>
+          <p>Comparte una idea para comenzar el intercambio.</p>
+          <button type="button" class="btn btn-festive" id="btnAgregarVacio">
+            Agregar mi deseo
+          </button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div
+    class="modal fade"
+    id="modalDeseo"
+    tabindex="-1"
+    aria-labelledby="modalDeseoTitulo"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg">
+      <div class="modal-content">
+        <form id="formDeseo" novalidate>
+          <div class="modal-header">
+            <div>
+              <span class="modal-header__eyebrow">Mi idea de regalo</span>
+              <h2 class="modal-title" id="modalDeseoTitulo">
+                <i class="bi bi-gift me-2" aria-hidden="true"></i>Agregar a la lista
+              </h2>
+            </div>
+            <button
+              type="button"
+              class="btn-close btn-close-white"
+              data-bs-dismiss="modal"
+              aria-label="Cerrar"
+            ></button>
+          </div>
+
+          <div class="modal-body">
+            <div class="form-intro">
+              <i class="bi bi-stars" aria-hidden="true"></i>
+              <p>
+                Agrega todas las opciones que quieras. En cada una puedes indicar talla, color,
+                autor u otra pista que ayude a elegir bien.
+              </p>
+            </div>
+
+            <div class="mb-4">
+              <label for="campoNombre" class="form-label">Tu nombre</label>
+              <input
+                type="text"
+                class="form-control"
+                id="campoNombre"
+                maxlength="80"
+                autocomplete="name"
+                placeholder="Nombre y apellido"
+                required
+              />
+              <div class="invalid-feedback">Escribe tu nombre.</div>
+            </div>
+
+            <div class="regalos-formulario__encabezado">
+              <div>
+                <span class="modal-header__eyebrow">Tus opciones</span>
+                <h3>Regalos que te gustaría recibir</h3>
+              </div>
+              <button type="button" class="btn btn-outline-festive btn-sm" id="btnAgregarOtroRegalo">
+                <i class="bi bi-plus-circle me-1" aria-hidden="true"></i>Añadir otro regalo
+              </button>
+            </div>
+
+            <div id="listaRegalosFormulario" class="lista-regalos-formulario"></div>
+
+            <div class="aviso-irreversible">
+              <i class="bi bi-exclamation-circle-fill" aria-hidden="true"></i>
+              <span>Después de confirmar, tu lista quedará publicada y no podrás editarla.</span>
+            </div>
+          </div>
+
+          <div class="modal-footer">
+            <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+              Cancelar
+            </button>
+            <button type="submit" class="btn btn-festive">
+              <i class="bi bi-send-fill me-2" aria-hidden="true"></i>Revisar y enviar
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <p class="footer__mensaje">
+      <i class="bi bi-stars" aria-hidden="true"></i>
+      <strong>Convivio 2026</strong>
+      <span aria-hidden="true">&middot;</span>
+      Una celebración para compartir con alegría
+    </p>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="https://cdn.jsdelivr.net/npm/simple-datatables@9.0.3/dist/umd/simple-datatables.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
