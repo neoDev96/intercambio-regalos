@@ -774,12 +774,45 @@ main {
 
 #modalDeseo .modal-body {
   padding: 24px;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain;
+  max-height: 60vh;
 }
 
 #modalDeseo .modal-footer {
   padding: 16px 24px;
   border-top-color: var(--borde);
   background: #fffcf7;
+}
+
+/* Permite el scroll táctil en el diálogo del modal en iOS/Android */
+#modalDeseo .modal-dialog {
+  touch-action: pan-y;
+  max-height: 95vh;
+  display: flex;
+  flex-direction: column;
+  margin: 1rem auto;
+}
+
+#modalDeseo .modal-content {
+  max-height: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* En móvil, 100vh no descuenta la barra del navegador y el modal se
+   extiende fuera de pantalla sin generar scroll. dvh usa la altura
+   dinámica real de la ventana visible. */
+@supports (height: 100dvh) {
+  #modalDeseo .modal-dialog {
+    max-height: 95dvh;
+  }
+
+  #modalDeseo .modal-body {
+    max-height: calc(95dvh - 200px);
+  }
 }
 
 .form-intro {
@@ -1129,6 +1162,27 @@ main {
 
   .footer__mensaje {
     flex-direction: column;
+  }
+
+  /* Ajustes del modal en móvil */
+  #modalDeseo .modal-dialog {
+    margin: 0.5rem;
+    max-height: calc(100vh - 1rem);
+    max-height: calc(100dvh - 1rem);
+  }
+
+  #modalDeseo .modal-body {
+    max-height: calc(100vh - 220px);
+    max-height: calc(100dvh - 220px);
+    padding: 18px;
+  }
+
+  #modalDeseo .modal-header {
+    padding: 18px;
+  }
+
+  #modalDeseo .modal-footer {
+    padding: 14px 18px;
   }
 }
 

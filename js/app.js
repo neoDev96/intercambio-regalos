@@ -591,6 +591,14 @@
       campoNombre.focus();
     });
 
+    // En móvil, Bootstrap puede interceptar touchmove y bloquear el scroll
+    // dentro del modal-body. Detener la propagación hacia el backdrop
+    // soluciona el problema sin afectar el comportamiento del modal.
+    const modalBody = elementoModal.querySelector(".modal-body");
+    modalBody.addEventListener("touchmove", function (evento) {
+      evento.stopPropagation();
+    }, { passive: true });
+
     formulario.addEventListener("submit", async function (evento) {
       evento.preventDefault();
       campoNombre.value = campoNombre.value.trim();
